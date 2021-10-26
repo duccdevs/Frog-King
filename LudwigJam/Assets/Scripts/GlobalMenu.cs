@@ -60,7 +60,7 @@ public class GlobalMenu : MonoBehaviour
 
         if (Fullscreen == 0)
         {
-            Screen.SetResolution(1080, 720, false);
+            Screen.SetResolution(1280, 720, false);
         }
         else
         {
