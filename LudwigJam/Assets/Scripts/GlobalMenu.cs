@@ -101,7 +101,7 @@ public class GlobalMenu : MonoBehaviour
         {
             //Credits
             print("Credits");
-            //Invoke("CanClickAgain", 0.25F);
+            Invoke("CanClickAgain", 27F);
             CreditAnim.SetTrigger("Roll");
             StartAnim.SetTrigger("Fade");
             inCredits = true;

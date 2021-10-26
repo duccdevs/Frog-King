@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             if (Time.timeScale == 0)
             {
                 PauseTime -= Time.unscaledDeltaTime;
-                PauseTimeText.text = PauseTime.ToString("F0");
+                PauseTimeText.text = PauseTime.ToString("F1");
             }
         }
 

@@ -10,7 +10,8 @@ public class CameraMovement : MonoBehaviour
     Vector2 lastPos;
 
     public bool FirstBoss = false;
-    bool FirstBoss2 = false;
+    public bool FirstBossB = false;
+    public bool FirstBoss2 = false;
     public int CamPos = 0;
     bool once = true;
     public GameObject FirstBossGO;
@@ -92,7 +93,7 @@ public class CameraMovement : MonoBehaviour
             transform.position = new Vector2(0, Mathf.Round(Player.transform.position.y / 10) * 10);
         }
 
-        if (lastPos != currentPos && !FirstBoss)
+        if (lastPos != currentPos && !FirstBossB)
         {
             if (lastPos.y > currentPos.y)
             {
@@ -127,6 +128,7 @@ public class CameraMovement : MonoBehaviour
             {
                 //Up
                 FirstBoss = true;
+                FirstBossB = true;
                 FirstBoss2 = true;
                 transform.Translate(Vector2.up * Time.deltaTime);
                 if (once)
@@ -159,9 +161,15 @@ public class CameraMovement : MonoBehaviour
                 //Exit
                 FirstBoss = false;
                 FirstBoss2 = false;
+                Invoke("SetFall", 1);
                 CamPos = 0;
             }
         }
+    }
+
+    void SetFall()
+    {
+        FirstBossB = false;
     }
 
     public void Cinema(float Delay, float Timer)
