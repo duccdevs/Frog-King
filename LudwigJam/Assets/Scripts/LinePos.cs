@@ -23,4 +23,15 @@ public class LinePos : MonoBehaviour
         line.SetPosition(0, Vector2.zero);
         line.SetPosition(1, Vector2.zero);
     }
+
+    void OnEnable()
+    {
+        print("Hello");
+        Tongue.transform.GetChild(0).GetComponent<CircleCollider2D>().enabled = true;
+        Invoke("StopTongue", 0.575F);
+    }
+    void StopTongue()
+    {
+        Tongue.transform.GetChild(0).GetComponent<CircleCollider2D>().enabled = false;
+    }
 }

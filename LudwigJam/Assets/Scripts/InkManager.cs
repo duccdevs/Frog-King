@@ -9,7 +9,8 @@ public class InkManager : MonoBehaviour
     void Start()
     {
         ScreenPos = Camera.main.transform.parent.gameObject;
-        Destroy(gameObject, 20);
+        Invoke("EnableBox", 0.25F);
+        Destroy(gameObject, 10);
     }
 
     void Update()
@@ -19,9 +20,14 @@ public class InkManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (transform.position.y > ScreenPos.transform.position.y + 10 || transform.position.y < ScreenPos.transform.position.y - 6 || transform.position.y > 230)
+        if (transform.position.y > ScreenPos.transform.position.y + 5.25F || transform.position.y < ScreenPos.transform.position.y - 5.25F || transform.position.y > 225)
         {
             Destroy(gameObject);
         }
+    }
+
+    void EnableBox()
+    {
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 }

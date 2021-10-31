@@ -49,7 +49,7 @@ public class Middle : MonoBehaviour
                 SecondBossDone = false;
                 if (A.position.x < B.position.x)
                 {
-                    transform.position = 0.5F * (new Vector3((A.position.x / 6) + 9.5F, A.position.y, 0) + B.position);
+                    transform.position = 0.5F * (new Vector3((A.position.x / 6) + 11.5F, A.position.y, 0) + B.position);
                     if (Once)
                     {
                         SquidHolder.GetComponent<Animator>().SetTrigger("Left");
@@ -59,7 +59,7 @@ public class Middle : MonoBehaviour
                 }
                 else
                 {
-                    transform.position = 0.5F * (new Vector3((A.position.x / 6) - 9.5F, A.position.y, 0) + B.position);
+                    transform.position = 0.5F * (new Vector3((A.position.x / 6) - 11.5F, A.position.y, 0) + B.position);
                     if (!Once)
                     {
                         SquidHolder.GetComponent<Animator>().SetTrigger("Right");

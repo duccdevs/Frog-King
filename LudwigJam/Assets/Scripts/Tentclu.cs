@@ -10,7 +10,7 @@ public class Tentclu : MonoBehaviour
     bool Once = true;
     bool DoInks = false;
 
-    float InkTimer = 2.0F;
+    float InkTimer = 1.0F;
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class Tentclu : MonoBehaviour
             {
                 InkTimer = 0.65F;
                 DoInks = false;
-                Invoke("StartShoot", 0.7F);
+                Invoke("StartShoot", 0.35F);
                 Once = false;
             }
         }
@@ -40,17 +40,15 @@ public class Tentclu : MonoBehaviour
             InkTimer -= Time.deltaTime;
             if (InkTimer <= 0.0F)
             {
-                //int RrandomShot = Random.Range(0, 3);
                 int RrandomShot = 0;
                 if (RrandomShot == 0 && Holder.GetComponent<Schmovin>().Attacking)
                 {
                     //ShootInk
                     GameObject inkinstance = Instantiate(InkObj, Aim.transform.position, transform.rotation);
-                    inkinstance.GetComponent<Rigidbody2D>().AddForce(-transform.up * 3.5F, ForceMode2D.Impulse);
+                    inkinstance.GetComponent<Rigidbody2D>().AddForce(-transform.up * 2.3F, ForceMode2D.Impulse);
                 }
 
-                //InkTimer = Random.Range(0.25F, 1.5F);
-                InkTimer = 1F;
+                InkTimer = 1.2F;
             }
         }
     }

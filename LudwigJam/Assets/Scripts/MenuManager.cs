@@ -8,8 +8,10 @@ public class MenuManager : MonoBehaviour
     GameObject Img;
     Text buttonText;
     GameObject menuMan;
+    public GameObject Notes;
 
     public int MenuID = 0;
+    public bool Die = false;
 
     void Start()
     {
@@ -39,12 +41,24 @@ public class MenuManager : MonoBehaviour
         buttonText.color = Color.white;
     }
 
+    public void ShowNotes()
+    {
+        Notes.SetActive(true);
+    }
+    public void HideNotes()
+    {
+        Notes.SetActive(false);
+    }
+
     public void Clicked()
     {
         if (menuMan.GetComponent<GlobalMenu>().CanClickButton)
         {
             menuMan.GetComponent<AudioSource>().PlayOneShot(menuMan.GetComponent<GlobalMenu>().ClickSFX);
-            Img.SetActive(false);
+            if (Die)
+            {
+                Img.SetActive(false);
+            }
             if (MenuID != -1)
             {
                 buttonText.color = Color.yellow;

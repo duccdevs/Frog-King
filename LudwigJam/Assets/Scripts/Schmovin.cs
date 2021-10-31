@@ -7,6 +7,7 @@ public class Schmovin : MonoBehaviour
     float StartAttackTimer = 2.5F;
     public bool Attacking = false;
     float Acceleration = 3.0F;
+    public Animator animHolder;
 
     void Start()
     {
@@ -17,9 +18,11 @@ public class Schmovin : MonoBehaviour
     {
         transform.rotation = Quaternion.identity;
         GetComponent<Animator>().SetBool("Attack", false);
-        StartAttackTimer = 1.25F;
+        StartAttackTimer = 0.75F;
         Attacking = false;
-        Acceleration = 4.0F;
+        Acceleration = 6.0F;
+        print("HO");
+        animHolder.SetTrigger("Bob");
     }
 
     void Update()
@@ -33,8 +36,8 @@ public class Schmovin : MonoBehaviour
 
         if (Attacking)
         {
-            Acceleration += Time.deltaTime * 6;
-            transform.Rotate(0, 0, (40 * Mathf.Clamp(Acceleration, 1, 10)) * Time.deltaTime);
+            Acceleration += Time.deltaTime * 19;
+            transform.Rotate(0, 0, (8 * Mathf.Clamp(Acceleration, 1, 40)) * Time.deltaTime);
             GetComponent<Animator>().SetBool("Attack", true);
         }
     }

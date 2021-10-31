@@ -14,6 +14,11 @@ public class IAmFrogme : MonoBehaviour
         if (StartFrog)
         {
             Invoke("StartTutorial", 8.0F);
+
+            if (GameObject.Find("GameManager").GetComponent<GameManager>().SkipIntros)
+            {
+                Time.timeScale = 10.0F;
+            }
         }
     }
 
@@ -23,6 +28,7 @@ public class IAmFrogme : MonoBehaviour
         {
             GetComponent<AudioSource>().Play();
             GetComponent<Animator>().SetTrigger("Note");
+            GameObject.Find("GameManager").GetComponent<GameManager>().FrogAmount++;
             Frogged = true;
         }
     }
@@ -46,5 +52,6 @@ public class IAmFrogme : MonoBehaviour
         gameObject.SetActive(false);
         GameObject.Find("Player").GetComponent<PlayerMovement>().CanMove = true;
         Camera.main.transform.parent.GetComponent<CameraMovement>().enabled = true;
+        Time.timeScale = 1.0F;
     }
 }

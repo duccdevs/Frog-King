@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     public float groundLength = 0.6F;
     public float wallLenght = 0.6F;
     public Vector3 colliderOffset;
+    bool onGroundOnce = true;
 
     [Header("Misc")]
     public bool Ragdolled = false;
@@ -98,6 +99,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Bag;
     public bool RightFlipped = false;
     public GameObject Crown;
+    public GameObject FrogPet;
+    public GameObject FrogPetPos;
+    public GameObject GodObj;
 
     [Header("Sounds")]
     public AudioSource audioOne;
@@ -113,6 +117,16 @@ public class PlayerMovement : MonoBehaviour
         if (PlayerPrefs.GetInt("Won") == 1)
         {
             Crown.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt("Frog") == 1)
+        {
+            FrogPet.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt("God") == 1)
+        {
+            GodObj.SetActive(true);
         }
     }
 
@@ -153,10 +167,18 @@ public class PlayerMovement : MonoBehaviour
             direction = Vector2.zero;
         }
 
-        fGroundedRemember -= Time.deltaTime;
         if (onGround)
         {
-            fGroundedRemember = fGroundedRememberTime;
+            if (onGroundOnce)
+            {
+                fGroundedRemember = fGroundedRememberTime;
+                onGroundOnce = false;
+            }
+        }
+        else
+        {
+            onGroundOnce = true;
+            fGroundedRemember -= Time.deltaTime;
         }
 
         if (fGroundedRemember > 0)
@@ -171,7 +193,6 @@ public class PlayerMovement : MonoBehaviour
         //GroundJump
         if (jumpTimer > Time.time)
         {
-            fGroundedRemember = 0;
             Jump();
         }
 
@@ -186,7 +207,6 @@ public class PlayerMovement : MonoBehaviour
         if ((fJumpPressedRemember > 0) && (fGroundedRemember > 0))
         {
             fJumpPressedRemember = 0;
-            fGroundedRemember = 0;
             jumpTimer = Time.time + jumpDelay;
         }
         
@@ -348,7 +368,7 @@ public class PlayerMovement : MonoBehaviour
         LeapDust.Play();
         LeapParticles.emissionRate = 0;
 
-        rb.AddForce(Vector2.up * 5.65F, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * 5.77F, ForceMode2D.Impulse);
 
         if (facingRight)
         {
@@ -362,6 +382,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void RagDoll()
     {
+        GameObject.Find("GameManager").GetComponent<GameManager>().GotHit++;
         Ragdolled = true;
         rb.sharedMaterial = bouncePhysics;
         CanMove = false;
@@ -375,6 +396,7 @@ public class PlayerMovement : MonoBehaviour
 
     void UnRagdoll()
     {
+        CamHolder.GetComponent<CameraMovement>().FallAmount = 0;
         transform.position = new Vector2(transform.position.x, Mathf.Round(transform.position.y * 2) / 2);
         rb.velocity = Vector2.zero;
         rb.sharedMaterial = normalPhysics;
@@ -431,31 +453,34 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CanMove)
         {
-            if (CanDoubleJump && !onGroundDelay && DoubleJumpAmount > 0 && !Ragdolled)
+            CreateDustJmp();
+            colliderOffset.x = 0.0F;
+            Invoke("ResetOffset", 0.21F);
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+
+            if (CanDoubleJump && fGroundedRemember < 0 && DoubleJumpAmount > 0 && !Ragdolled)
             {
+                //DoubleJump
                 DoubleJumpAmount--;
-                CreateDustJmp();
                 CamHolder.GetComponent<CameraMovement>().ShakeCam(0.125F);
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-                jumpTimer = 0;
-                colliderOffset.x = 0.0F;
-                Invoke("ResetOffset", 0.21F);
                 if (DoubleJumpAmount <= 0)
                 {
                     DoubleJump = false;
                     CanDoubleJump = false;
                 }
+                dustJumpAir.Play();
+                dustJumpAir.transform.GetComponent<AudioSource>().Play();
+                fGroundedRemember = 0;
+                jumpTimer = 0;
                 return;
             }
             else
             {
-                CreateDustJmp();
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+                //Single Jump
+                dustJump.Play();
+                fGroundedRemember = 0;
                 jumpTimer = 0;
-                colliderOffset.x = 0.0F;
-                Invoke("ResetOffset", 0.21F);
                 return;
             }
         }
@@ -586,6 +611,14 @@ public class PlayerMovement : MonoBehaviour
 
             if (EnteredGround)
             {
+                CamHolder.GetComponent<CameraMovement>().FallAmount = 0;
+
+                FrogPetPos.transform.position = transform.position;
+                if (FrogPet.GetComponent<FrogPet>().JumpAgain)
+                {
+                    FrogPet.GetComponent<FrogPet>().SetPos();
+                }
+
                 if (CanMove)
                 {
                     rb.sharedMaterial = normalPhysics;
@@ -680,8 +713,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 Inked = true;
                 Invoke("UnInk", 0.1F);
-                rb.velocity = Vector2.zero;
-                RagDoll();
             }
 
             GetHitEffectInk();
@@ -730,6 +761,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void SpitOut()
     {
+        GameObject.Find("GameManager").GetComponent<GameManager>().GotHit++;
         Bag.SetActive(false);
         Mouth2.SetActive(true);
         foreach(GameObject go in HideParts)
@@ -818,12 +850,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (onGroundDelay)
         {
-            dustJump.Play();
+            //print("UR GAY LOL + L");
+            //dustJump.Play();
         }
         else
         {
-            dustJumpAir.Play();
-            dustJumpAir.transform.GetComponent<AudioSource>().Play();
+            //print("UR GAY LOL");
+            //dustJumpAir.Play();
+            //dustJumpAir.transform.GetComponent<AudioSource>().Play();
         }
     }
     void CreateDustLand()
@@ -844,6 +878,7 @@ public class PlayerMovement : MonoBehaviour
 
     void GetHitEffect()
     {
+        GameObject.Find("GameManager").GetComponent<GameManager>().GotHit++;
         GetHit.Play();
         GetHit.transform.GetComponent<AudioSource>().Play();
         CamHolder.GetComponent<CameraMovement>().ShakeCam(0.2F);
@@ -851,6 +886,7 @@ public class PlayerMovement : MonoBehaviour
 
     void GetHitEffectInk()
     {
+        GameObject.Find("GameManager").GetComponent<GameManager>().GotHit++;
         FloatAbilityTime = 0.0F;
         FloatAbility = false;
         FloatHold.emissionRate = 0;

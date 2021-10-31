@@ -10,12 +10,18 @@ public class GameManager : MonoBehaviour
     public AudioSource musicMan;
     GameObject Player;
     public GameObject PauseMenu;
+    public GameObject CamHolder;
     public Text PauseTimeText;
-    float PauseTime = 4;
+    float PauseTime = 1;
     public bool DevMode = false;
 
     public Text TimeText;
     public Text ProgressText;
+    Color TimeTextColorStart;
+    public Color TimeTextColorFade;
+
+    public int FrogAmount = 0;
+    public int GotHit = -1;
 
     float timer = 0.0F;
 
@@ -24,13 +30,26 @@ public class GameManager : MonoBehaviour
 
     public bool BeatGame = false;
     bool once = true;
+    bool Pausin = false;
+    public bool SkipIntros = false;
 
     void Start()
     {
         Application.targetFrameRate = 60;
 
+        TimeTextColorStart = TimeText.color;
+
         //Saving
         Player = GameObject.Find("Player");
+
+        if (PlayerPrefs.GetInt("Skip", 0) == 1)
+        {
+            SkipIntros = true;
+        }
+        else
+        {
+            SkipIntros = false;
+        }
     }
 
     void Update()
@@ -43,7 +62,16 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1.0F;
         }
-        if (Input.GetKeyUp(KeyCode.R))
+        
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Pausin = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            Pausin = false;
+        }
+        if (Input.GetKeyUp(KeyCode.R) && Pausin)
         {
             SceneManager.LoadScene(1);
         }
@@ -55,7 +83,7 @@ public class GameManager : MonoBehaviour
         {
             GetComponent<AudioSource>().Play();
 
-            PauseTime = 4;
+            PauseTime = 1;
 
             if (Time.timeScale == 1)
             {
@@ -68,17 +96,8 @@ public class GameManager : MonoBehaviour
                 PauseMenu.SetActive(false);
             }
         }
-        if (Input.GetKeyDown(KeyCode.M) && DevMode)
-        {
-            if (musicMan.volume == 1)
-            {
-                musicMan.volume = 0;
-            }
-            else
-            {
-                musicMan.volume = 1;
-            }
-        }
+
+        musicMan.volume = PlayerPrefs.GetFloat("Music", 1);
 
         if (PauseTime <= 0)
         {
@@ -90,7 +109,7 @@ public class GameManager : MonoBehaviour
             if (Time.timeScale == 0)
             {
                 PauseTime -= Time.unscaledDeltaTime;
-                PauseTimeText.text = PauseTime.ToString("F1");
+                PauseTimeText.text = "HOLD - " + PauseTime.ToString("F1");
             }
         }
 
@@ -103,9 +122,20 @@ public class GameManager : MonoBehaviour
         {
             Player.transform.position = new Vector2(3, 106);
         }
+
+        //Stuff
+        if (Player.transform.position.x < -6.75F && Player.transform.position.y > CamHolder.transform.position.y + 3.45F)
+        {
+            TimeText.color = TimeTextColorFade;
+            ProgressText.color = TimeTextColorFade;
+        }
+        else
+        {
+            TimeText.color = TimeTextColorStart;
+            ProgressText.color = TimeTextColorStart;
+        }
     
         //Progress
-
         if (!BeatGame)
         {
             timer = Mathf.Max(0, timer + Time.deltaTime);
@@ -116,6 +146,15 @@ public class GameManager : MonoBehaviour
             if (timer < PlayerPrefs.GetFloat("Time", 0) || PlayerPrefs.GetFloat("Time", 0) == 0)
             {
                 PlayerPrefs.SetFloat("Time", timer);
+            }
+            if(GotHit == 0)
+            {
+                PlayerPrefs.SetInt("God", 1);
+            }
+            if (FrogAmount >= 21)
+            {
+                print("Unlocked Frog Pet");
+                PlayerPrefs.SetInt("Frog", 1);
             }
             once = false;
         }

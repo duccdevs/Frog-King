@@ -26,9 +26,15 @@ public class GlobalMenu : MonoBehaviour
     public int Fullscreen = 0;
     public bool inSettings = false;
     public Text muteText;
+    public Text SkipText;
     public Slider sliderVol;
 
+    bool MuteMute = true;
+    bool SkipSkip = true;
+
     bool inCredits = false;
+
+    bool Shifting = false;
 
     void Start()
     {
@@ -67,6 +73,28 @@ public class GlobalMenu : MonoBehaviour
             Screen.SetResolution(1920, 1080, true);
         }
 
+        if (PlayerPrefs.GetFloat("Music", 1) == 0)
+        {
+            muteText.text = "MUTED MUSIC";
+            MuteMute = false;
+        }
+        else
+        {
+            muteText.text = "MUTE MUSIC";
+            MuteMute = true;
+        }
+
+        if (PlayerPrefs.GetInt("Skip", 0) == 0)
+        {
+            SkipText.text = "SKIP INTRO";
+            SkipSkip = true;
+        }
+        else
+        {
+            SkipText.text = "SKIPPING INTRO";
+            SkipSkip = false;
+        }
+
         //Save
         PlayerPrefs.SetInt("Fullscreen", Fullscreen);
         PlayerPrefs.SetFloat("Sound", sliderVol.value);
@@ -82,6 +110,7 @@ public class GlobalMenu : MonoBehaviour
             print("StartGame");
             StartAnim.SetTrigger("Start");
             Invoke("StartGameScene", 6.35F);
+            Invoke("CanClickAgain", 30F);
         }
 
         if (i == 1)
@@ -94,7 +123,7 @@ public class GlobalMenu : MonoBehaviour
             }
             inSettings = true;
             SettingsMenu.SetActive(true);
-            Invoke("CanClickAgain", 0.25F);
+            Invoke("CanClickAgain", 0.01F);
         }
 
         if (i == 2)
@@ -119,6 +148,20 @@ public class GlobalMenu : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Shifting = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            Shifting = false;
+        }
+        if (Input.GetKeyDown(KeyCode.P) && Shifting)
+        {
+            PlayerPrefs.DeleteAll();
+            SceneManager.LoadScene(0);
+        }
+
         if (inCredits && Input.anyKey)
         {
             CreditAnim.SetTrigger("Skip");
@@ -130,25 +173,48 @@ public class GlobalMenu : MonoBehaviour
         if (inSettings)
         {
             AudioListener.volume = sliderVol.value;
-            if (sliderVol.value != 0)
-            {
-                muteText.text = "MUTE";
-                muteText.transform.parent.GetComponent<Button>().interactable = true;
-            }
-            else
-            {
-                muteText.text = "MUTED";
-                muteText.transform.parent.GetComponent<Button>().interactable = false;
-            }
         }
     }
     public void SetMuted()
     {
-        sliderVol.value = 0;
-        AudioListener.volume = 0;
-        muteText.text = "MUTED";
-        muteText.transform.parent.GetComponent<Button>().interactable = false;
-        PlayerPrefs.SetFloat("Sound", sliderVol.value);
+        Invoke("CanClickAgain", 0.01F);
+
+        if (MuteMute)
+        {
+            PlayerPrefs.SetFloat("Music", 0);
+            muteText.text = "MUTED MUSIC";
+            ApplySettings();
+            MuteMute = false;
+            return;
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("Music", 1);
+            muteText.text = "MUTE MUSIC";
+            ApplySettings();
+            MuteMute = true;
+            return;
+        }
+    }
+    public void SetSkip()
+    {
+        Invoke("CanClickAgain", 0.01F);
+
+        if (SkipSkip)
+        {
+            PlayerPrefs.SetInt("Skip", 1);
+            SkipText.text = "SKIPPING INTRO";
+            SkipSkip = false;
+            return;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Skip", 0);
+            SkipText.text = "SKIP INTRO";
+            SkipSkip = true;
+            ApplySettings();
+            return;
+        }
     }
     public void SetFullscreen()
     {
@@ -182,7 +248,7 @@ public class GlobalMenu : MonoBehaviour
             go.SetActive(true);
         }
         inSettings = false;
-        Invoke("CanClickAgain", 0.25F);
+        Invoke("CanClickAgain", 0.01F);
 
         //SaveSettings
         PlayerPrefs.SetInt("Fullscreen", Fullscreen);

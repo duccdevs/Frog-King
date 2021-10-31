@@ -37,6 +37,8 @@ public class CameraMovement : MonoBehaviour
     public GameObject S2Particles;
     public GameObject S3Particles;
 
+    public int FallAmount = 0;
+
     bool Entertwo = true;
     bool Enterthree = true;
 
@@ -100,7 +102,11 @@ public class CameraMovement : MonoBehaviour
                 if (!Player.GetComponent<PlayerMovement>().Ragdolled)
                 {
                     print("Fall");
-                    Player.GetComponent<PlayerMovement>().RagDoll();
+                    FallAmount++;
+                    if (FallAmount == 2)
+                    {
+                        Player.GetComponent<PlayerMovement>().RagDoll();
+                    }
                 }
                 lastPos = currentPos;
             }
@@ -179,6 +185,10 @@ public class CameraMovement : MonoBehaviour
 
     public void FirstBossStart()
     {
+        if (GameObject.Find("GameManager").GetComponent<GameManager>().SkipIntros)
+        {
+            Time.timeScale = 10.0F;
+        }
         FirstBossGO.GetComponent<AudioSource>().Play();
         FallObj.GetComponent<ParticleSystem>().Play();
         Invoke("FirstDelay", 3.5F);
@@ -189,10 +199,12 @@ public class CameraMovement : MonoBehaviour
     {
         Fade.GetComponent<Animator>().SetTrigger("Fade");
         Invoke("EnableAll", 0.25F);
+        Time.timeScale = 1.0F;
     }
     void EnableAll()
     {
         Player.transform.position = new Vector2(0, -3.5F);
+        Player.GetComponent<PlayerMovement>().CanMove = true;
         RealFirstBoss.SetActive(true);
         FirstBossGO.SetActive(false);
         StageOne.SetActive(true);
@@ -215,6 +227,10 @@ public class CameraMovement : MonoBehaviour
     //Squid Boss
     public void SecondBossStart()
     {
+        if (GameObject.Find("GameManager").GetComponent<GameManager>().SkipIntros)
+        {
+            Time.timeScale = 10.0F;
+        }
         SecondBossParticle.SetActive(true);
         Invoke("SpawnSquid", 8);
         Invoke("ActivateSquid", 15);
@@ -229,11 +245,17 @@ public class CameraMovement : MonoBehaviour
         SecondBoss2GO.GetComponent<Schmovin>().enabled = true;
 
         Player.GetComponent<PlayerMovement>().CanMove = true;
+
+        Time.timeScale = 1.0F;
     }
 
     //Frog Boss
     public void ThirdBossStart()
     {
+        if (GameObject.Find("GameManager").GetComponent<GameManager>().SkipIntros)
+        {
+            Time.timeScale = 10.0F;
+        }
         Invoke("CamMove", 1.5F);
         ThirdBossGo.SetActive(true);
         FakePad.SetActive(false);
@@ -268,6 +290,7 @@ public class CameraMovement : MonoBehaviour
     {
         ThirdBossGo.SetActive(false);
         ThirdBoss1Go.SetActive(true);
+        Time.timeScale = 1.0F;
     }
 
     public void ShakeCam(float time)
