@@ -187,7 +187,14 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            onGroundDelay = false;
+            if (!onGround)
+            {
+                onGroundDelay = false;
+            }
+            else
+            {
+                onGroundDelay = true;
+            }
         }
 
         //GroundJump
@@ -477,11 +484,14 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                //Single Jump
-                dustJump.Play();
-                fGroundedRemember = 0;
-                jumpTimer = 0;
-                return;
+                if (!Floating)
+                {
+                    //Single Jump
+                    dustJump.Play();
+                    fGroundedRemember = 0;
+                    jumpTimer = 0;
+                    return;
+                }
             }
         }
     }
