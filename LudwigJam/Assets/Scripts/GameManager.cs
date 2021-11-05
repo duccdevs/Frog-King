@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public int FrogAmount = 0;
     public int GotHit = -1;
 
-    float timer = 0.0F;
+    public float timer = 0.0F;
 
     float MaxHeight = 400;
     float CurrentHeight;
@@ -75,11 +75,15 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
+        if (Input.GetButtonDown("Restart"))
+        {
+            SceneManager.LoadScene(1);
+        }
         if (Input.GetKeyUp(KeyCode.N) && DevMode)
         {
             SceneManager.LoadScene(0);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Esc"))
         {
             GetComponent<AudioSource>().Play();
 
@@ -104,7 +108,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(0);
         }
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape) || Input.GetButton("Esc"))
         {
             if (Time.timeScale == 0)
             {

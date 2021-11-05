@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd85fed6db2aa747945226a7d9e5dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GoldenInk: {fileID: 21300000, guid: f02856cc4335d904fafbf983d93ff7ca, type: 3}
 --- !u!95 &1729694876
 Animator:
   serializedVersion: 3

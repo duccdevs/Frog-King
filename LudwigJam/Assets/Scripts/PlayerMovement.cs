@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
         float checkSpeedY;
         checkSpeedY = rb.velocity.y;
 
-        if (Frogged && direction.y == -1 && ThisFrog != null)
+        if (Frogged && direction.y <= -0.5F && ThisFrog != null)
         {
             if (!ThisFrog.GetComponent<AudioSource>().isPlaying)
             {
@@ -500,7 +500,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (DJPlat)
         {
-            if (onGround && direction.y == -1)
+            if (onGround && direction.y <= -0.5F)
             {
                 //Get DoubleJump
                 StartSummon();
@@ -514,7 +514,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (FloatPlat)
         {
-            if (onGround && direction.y == -1)
+            if (onGround && direction.y <= -0.5F)
             {
                 //Get Float
                 StartSummon();
@@ -529,7 +529,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (LeapPlat)
         {
-            if (onGround && direction.y == -1)
+            if (onGround && direction.y <= -0.5F)
             {
                 //Get Leap
                 StartSummon();

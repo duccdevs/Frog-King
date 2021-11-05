@@ -5,12 +5,26 @@ using UnityEngine;
 public class InkManager : MonoBehaviour
 {
     private GameObject ScreenPos;
+    SpriteRenderer SpriteHolder;
+
+    public Sprite GoldenInk;
 
     void Start()
     {
         ScreenPos = Camera.main.transform.parent.gameObject;
+        SpriteHolder = GetComponent<SpriteRenderer>();
         Invoke("EnableBox", 0.25F);
         Destroy(gameObject, 10);
+
+        if (PlayerPrefs.GetInt("GSquid", 0) == 1)
+        {
+            SetGolden();
+        }
+    }
+
+    void SetGolden()
+    {
+        SpriteHolder.sprite = GoldenInk;
     }
 
     void Update()

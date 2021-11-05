@@ -2430,8 +2430,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.21, y: -174.8}
-  m_SizeDelta: {x: 1950.4, y: 6403.6}
+  m_AnchoredPosition: {x: 0.21, y: -179.3}
+  m_SizeDelta: {x: 1950.4, y: 6492.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &674636793
 MonoBehaviour:
@@ -2464,12 +2464,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\n1.6.1\n\nadded:\n\tmore settings\n\n\tadded hidden cosmetics\n\nbug
-    fixes:\n\tfixed double jump bug\n\nplayer changes:\n\tless friction when\n\tknocked
-    down\n\n\tenter free fall after falling\n\t2 screens\n\nsquid changes:\n\tsquid
-    has comepletely\n\tbeen revamped\n\n\tink projectiles made less\n\tpunishing\n\nfrog
-    king changes:\n\tvisual hitbox of tongue\n\tfixed\n\nmap changes:\n\tless punishing
-    map\n\toverall\n\n\tthe shallows have been\n\tchanged"
+  m_Text: "\nadded:\n\tmore settings\n\n\tadded hidden cosmetics\n\nbug fixes:\n\tfixed
+    double jump bug\n\nplayer changes:\n\tless friction when\n\tknocked down\n\n\tenter
+    free fall after falling\n\t2 screens\n\nsquid changes:\n\tsquid has comepletely\n\tbeen
+    revamped\n\n\tink projectiles made less\n\tpunishing\n\nfrog king changes:\n\tvisual
+    hitbox of tongue\n\tfixed\n\nmap changes:\n\tless punishing map\n\toverall\n\n\tthe
+    shallows have been\n\tchanged"
 --- !u!222 &674636794
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2655,7 +2655,7 @@ MonoBehaviour:
 
     Ottomated     Clipped
 
-    ludwig-jam discord'
+    ludwig-jam   Valmerix'
 --- !u!222 &730069792
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3962,6 +3962,8 @@ MonoBehaviour:
   Sounds:
   - {fileID: 8300000, guid: e3f9599660b675547b797c583345ae8b, type: 3}
   - {fileID: 8300000, guid: 8bf93a213c6f1254eb9108c5a1421085, type: 3}
+  GoldenSprites: []
+  Holder: []
 --- !u!82 &995941612
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6670,6 +6672,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sounds:
   - {fileID: 8300000, guid: e3f9599660b675547b797c583345ae8b, type: 3}
+  GoldenSprites: []
+  Holder: []
 --- !u!82 &1899179693
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6855,7 +6859,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ver1.6.1
+  m_Text: ver 1.6.2
 --- !u!222 &1901813708
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -1620,16 +1620,7 @@ AnimationClip:
     path: MonkeHandL/SpriteHandD
     classID: 212
     script: {fileID: 0}
-  m_PPtrCurves:
-  - curve:
-    - time: 0
-      value: {fileID: 21300000, guid: f42d9f0d0cf1d3c4a97d5997aa93f799, type: 3}
-    - time: 6.016667
-      value: {fileID: 21300000, guid: 3fd6e9911efe93e43ad338f9d92a904c, type: 3}
-    attribute: m_Sprite
-    path: MonkeHead/HeadSprite
-    classID: 212
-    script: {fileID: 0}
+  m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -1686,16 +1677,7 @@ AnimationClip:
       typeID: 212
       customType: 26
       isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1156964860
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-    pptrCurveMapping:
-    - {fileID: 21300000, guid: f42d9f0d0cf1d3c4a97d5997aa93f799, type: 3}
-    - {fileID: 21300000, guid: 3fd6e9911efe93e43ad338f9d92a904c, type: 3}
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -6258,6 +6240,13 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
+    messageOptions: 0
+  - time: 6.016667
+    functionName: WakeUp
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0
   - time: 9.083333
     functionName: SFX

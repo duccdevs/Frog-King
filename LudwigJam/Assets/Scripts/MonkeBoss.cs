@@ -14,11 +14,21 @@ public class MonkeBoss : MonoBehaviour
 
     public AudioClip[] Sounds;
 
+    public Sprite[] GoldenSprites;
+    public SpriteRenderer[] Holder;
+
     void Start()
     {
         Invoke("SwingHand", Random.Range(2, 3));
         TimeToGo = true;
         GameObject.Find("NamePlate").GetComponent<NamePlate>().ShowName(1);
+
+        if (PlayerPrefs.GetInt("GM", 0) == 1)
+        {
+            Holder[0].sprite = GoldenSprites[0];
+            Holder[1].sprite = GoldenSprites[1];
+            Holder[2].sprite = GoldenSprites[1];
+        }
     }
 
     void SwingHand()
@@ -83,7 +93,7 @@ public class MonkeBoss : MonoBehaviour
             RightHand.GetComponent<Rigidbody2D>().AddForce(ThrowPos * 4F, ForceMode2D.Impulse);
         }
         Invoke("ResetHands", 0.75F);
-        Invoke("SwingHand", 5);
+        Invoke("SwingHand", 8);
     }
 
     void ResetHands()

@@ -42,6 +42,9 @@ public class CameraMovement : MonoBehaviour
     bool Entertwo = true;
     bool Enterthree = true;
 
+    bool SquidTimer = false;
+    float SquidTime = 0.0F;
+
     void Start()
     {
         GameObject.Find("NamePlate").GetComponent<NamePlate>().ShowName(0);
@@ -71,8 +74,18 @@ public class CameraMovement : MonoBehaviour
             if (Entertwo)
             {
                 GameObject.Find("NamePlate").GetComponent<NamePlate>().ShowName(2);
+                if (GameObject.Find("GameManager").GetComponent<GameManager>().timer <= 120)
+                {
+                    PlayerPrefs.SetInt("GM", 1);
+                }
+                SquidTimer = true;
                 Entertwo = false;
             }
+        }
+
+        if (SquidTimer)
+        {
+            SquidTime += Time.deltaTime;
         }
 
         if (transform.position.y >= 230)
@@ -86,6 +99,12 @@ public class CameraMovement : MonoBehaviour
             {
                 GameObject.Find("NamePlate").GetComponent<NamePlate>().ShowName(4);
                 Enterthree = false;
+                SquidTimer = false;
+
+                if (SquidTime <= 96)
+                {
+                    PlayerPrefs.SetInt("GSquid", 1);
+                }
             }
         }
 

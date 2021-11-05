@@ -10,12 +10,26 @@ public class Tentclu : MonoBehaviour
     bool Once = true;
     bool DoInks = false;
 
+    public Sprite GoldenTent;
+    SpriteRenderer spriteHolder;
+
     float InkTimer = 1.0F;
 
     void Start()
     {
+        spriteHolder = transform.GetChild(0).GetComponent<SpriteRenderer>();
         Holder = transform.parent.gameObject;
         Aim = transform.GetChild(0).gameObject;
+        
+        if (PlayerPrefs.GetInt("GSquid", 0) == 1)
+        {
+            SetGolden();
+        }
+    }
+
+    void SetGolden()
+    {
+        spriteHolder.sprite = GoldenTent;
     }
 
     void Update()
@@ -24,9 +38,9 @@ public class Tentclu : MonoBehaviour
         {
             if (Once)
             {
-                InkTimer = 0.65F;
+                InkTimer = 0.8F;
                 DoInks = false;
-                Invoke("StartShoot", 0.35F);
+                Invoke("StartShoot", 0.5F);
                 Once = false;
             }
         }
