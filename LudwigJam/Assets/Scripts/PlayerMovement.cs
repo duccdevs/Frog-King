@@ -102,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject FrogPet;
     public GameObject FrogPetPos;
     public GameObject GodObj;
+    public GameObject ShowJumpies;
+    bool TutJump = true;
 
     [Header("Sounds")]
     public AudioSource audioOne;
@@ -469,6 +471,12 @@ public class PlayerMovement : MonoBehaviour
             if (CanDoubleJump && fGroundedRemember < 0 && DoubleJumpAmount > 0 && !Ragdolled)
             {
                 //DoubleJump
+                if (TutJump)
+                {
+                    ShowJumpies.SetActive(true);
+                    Destroy(ShowJumpies, 6.5F);
+                    TutJump = false;
+                }
                 DoubleJumpAmount--;
                 CamHolder.GetComponent<CameraMovement>().ShakeCam(0.125F);
                 if (DoubleJumpAmount <= 0)
