@@ -16,7 +16,10 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         menuMan = GameObject.Find("MenuManager");
-        Img = transform.GetChild(1).gameObject;
+        if (transform.GetChild(1).gameObject != null)
+        {
+            Img = transform.GetChild(1).gameObject;
+        }
         buttonText = transform.GetChild(0).GetComponent<Text>();
     }
 
@@ -69,7 +72,10 @@ public class MenuManager : MonoBehaviour
 
     void OnDisable()
     {
-        Img.SetActive(false);
+        if (Img != null)
+        {
+            Img.SetActive(false);
+        }
         buttonText.color = Color.white;
     }
 }

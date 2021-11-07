@@ -13,7 +13,7 @@ public class Tentclu : MonoBehaviour
     public Sprite GoldenTent;
     SpriteRenderer spriteHolder;
 
-    float InkTimer = 1.0F;
+    float InkTimer = 1.7F;
 
     void Start()
     {
@@ -38,9 +38,9 @@ public class Tentclu : MonoBehaviour
         {
             if (Once)
             {
-                InkTimer = 0.8F;
+                InkTimer = 1.6F;
                 DoInks = false;
-                Invoke("StartShoot", 0.5F);
+                Invoke("StartShoot", 0.4F);
                 Once = false;
             }
         }
@@ -62,7 +62,7 @@ public class Tentclu : MonoBehaviour
                     inkinstance.GetComponent<Rigidbody2D>().AddForce(-transform.up * 2.3F, ForceMode2D.Impulse);
                 }
 
-                InkTimer = 1.2F;
+                InkTimer = 1.8F;
             }
         }
     }

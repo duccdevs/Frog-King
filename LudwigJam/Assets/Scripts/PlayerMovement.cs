@@ -104,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject GodObj;
     public GameObject ShowJumpies;
     bool TutJump = true;
+    bool TutSpit = true;
 
     [Header("Sounds")]
     public AudioSource audioOne;
@@ -789,17 +790,31 @@ public class PlayerMovement : MonoBehaviour
         rb.isKinematic = false;
         InFrog = false;
         RagDoll();
-        if (transform.position.x < 0)
+        if (TutSpit)
         {
-            rb.AddForce(new Vector2(Random.Range(0, 50), Random.Range(-30, 30)), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0, -5), ForceMode2D.Impulse);
+            CamHolder.GetComponent<CameraMovement>().ShakeCam(0.2F);
+            GetHit.transform.GetComponent<AudioSource>().Play();
+            Invoke("CloseMouth", 0.75F);
+            TutSpit = false;
+            return;
         }
         else
         {
-            rb.AddForce(new Vector2(Random.Range(-50, 0), Random.Range(-30, 30)), ForceMode2D.Impulse);
+            if (transform.position.x < 0)
+            {
+                rb.AddForce(new Vector2(Random.Range(0, 50), Random.Range(-30, 30)), ForceMode2D.Impulse);
+            }
+            else
+            {
+                rb.AddForce(new Vector2(Random.Range(-50, 0), Random.Range(-30, 30)), ForceMode2D.Impulse);
+            }
+
+            CamHolder.GetComponent<CameraMovement>().ShakeCam(0.2F);
+            GetHit.transform.GetComponent<AudioSource>().Play();
+            Invoke("CloseMouth", 0.75F);
+            return;
         }
-        CamHolder.GetComponent<CameraMovement>().ShakeCam(0.2F);
-        GetHit.transform.GetComponent<AudioSource>().Play();
-        Invoke("CloseMouth", 0.75F);
     }
     void CloseMouth()
     {
