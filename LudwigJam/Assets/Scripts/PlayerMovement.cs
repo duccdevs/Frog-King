@@ -280,7 +280,11 @@ public class PlayerMovement : MonoBehaviour
 
             if (!onGroundDelay && LeapAbility && CanLeap && Input.GetButtonDown("Jump"))
             {
-                DoLeap();
+                Invoke("DoLeap", 0.115F);
+                linearDrag = 1;
+                rb.drag = linearDrag;
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+                gravity = 0;
                 CanLeap = false;
                 return;
             }
@@ -373,20 +377,21 @@ public class PlayerMovement : MonoBehaviour
         linearDrag = 0;
         rb.drag = linearDrag;
         rb.velocity = Vector2.zero;
+        gravity = 2.5F;
         CamHolder.GetComponent<CameraMovement>().ShakeCam(0.115F);
         LeapJump.Play();
         LeapDust.Play();
         LeapParticles.emissionRate = 0;
 
-        rb.AddForce(Vector2.up * 5.77F, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * 6.1F, ForceMode2D.Impulse);
 
         if (facingRight)
         {
-            rb.AddForce(Vector2.right * 3.175F, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * 2.6F, ForceMode2D.Impulse);
         }
         else
         {
-            rb.AddForce(Vector2.left * 3.175F, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.left * 2.6F, ForceMode2D.Impulse);
         }
     }
 
@@ -557,6 +562,7 @@ public class PlayerMovement : MonoBehaviour
     void StartSummon()
     {
         direction.y = 0;
+        rb.velocity = new Vector2(0, rb.velocity.y);
         CanMove = false;
         animatorBody.SetTrigger("Yoink");
         animatorHands.SetTrigger("Yoink");
@@ -712,8 +718,8 @@ public class PlayerMovement : MonoBehaviour
         {
             RagDoll();
             GetHitEffect();
-            rb.AddForce(Vector2.up * 2, ForceMode2D.Impulse);
-            rb.AddForce(Vector2.right * 8, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * 12, ForceMode2D.Impulse);
             collider2D.GetComponent<BoxCollider2D>().enabled = false;
         }
 
@@ -721,8 +727,8 @@ public class PlayerMovement : MonoBehaviour
         {
             RagDoll();
             GetHitEffect();
-            rb.AddForce(Vector2.up * 2, ForceMode2D.Impulse);
-            rb.AddForce(Vector2.left * 8, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.left * 12, ForceMode2D.Impulse);
             collider2D.GetComponent<BoxCollider2D>().enabled = false;
         }
 
