@@ -37,6 +37,8 @@ public class CameraMovement : MonoBehaviour
     public GameObject S2Particles;
     public GameObject S3Particles;
 
+    public GameObject CurObj;
+
     public int FallAmount = 0;
 
     bool Entertwo = true;
@@ -44,6 +46,9 @@ public class CameraMovement : MonoBehaviour
 
     bool SquidTimer = false;
     float SquidTime = 0.0F;
+
+    bool FrogTimer = false;
+    float FrogTime = 0.0F;
 
     void Start()
     {
@@ -78,6 +83,10 @@ public class CameraMovement : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("GM", 1);
                 }
+
+                CurObj.GetComponent<HidemeUwu>().TimeString = GameObject.Find("GameManager").GetComponent<GameManager>().timer;
+                CurObj.SetActive(true);
+
                 SquidTimer = true;
                 Entertwo = false;
             }
@@ -86,6 +95,11 @@ public class CameraMovement : MonoBehaviour
         if (SquidTimer)
         {
             SquidTime += Time.deltaTime;
+        }
+
+        if (FrogTimer)
+        {
+            FrogTime += Time.deltaTime;
         }
 
         if (transform.position.y >= 230)
@@ -101,11 +115,29 @@ public class CameraMovement : MonoBehaviour
                 Enterthree = false;
                 SquidTimer = false;
 
-                if (SquidTime <= 96)
+                if (SquidTime <= 95)
                 {
                     PlayerPrefs.SetInt("GSquid", 1);
                 }
+
+                CurObj.GetComponent<HidemeUwu>().TimeString = SquidTime;
+                CurObj.SetActive(true);
+
+                FrogTimer = true;
             }
+        }
+
+        if (transform.position.y >= 400 && FrogTimer && Player.GetComponent<PlayerMovement>().onGround)
+        {
+            if (FrogTime <= 120)
+            {
+                PlayerPrefs.SetInt("GFrog", 1);
+            }
+
+            CurObj.GetComponent<HidemeUwu>().TimeString = FrogTime;
+            CurObj.SetActive(true);
+
+            FrogTimer = false;
         }
 
         //Normal Cam

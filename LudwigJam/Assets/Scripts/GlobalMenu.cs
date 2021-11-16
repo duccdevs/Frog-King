@@ -50,12 +50,12 @@ public class GlobalMenu : MonoBehaviour
         timetime = PlayerPrefs.GetFloat("Time", 0);
         if (timetime == 0)
         {
-            scoreTimeText.text = "--:--:--";
+            scoreTimeText.text = "--:--:--:--";
         }
         else
         {
             TimeSpan timeSpan = TimeSpan.FromSeconds(timetime);
-            scoreTimeText.text = timeSpan.Hours.ToString("00") + ":" + timeSpan.Minutes.ToString("00") + ":" + timeSpan.Seconds.ToString("00");
+            scoreTimeText.text = timeSpan.Hours.ToString("00") + ":" + timeSpan.Minutes.ToString("00") + ":" + timeSpan.Seconds.ToString("00") + ":" + timeSpan.Milliseconds.ToString("000");
             Crown.SetActive(true);
         }
     }

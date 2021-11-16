@@ -9,9 +9,11 @@ public class AnimB : MonoBehaviour
     public Sprite[] GoldenSprites;
     public SpriteRenderer[] Holder;
 
+    public bool dontRead = false;
+
     void Start()
     {
-        if (PlayerPrefs.GetInt("GM", 0) == 1)
+        if (PlayerPrefs.GetInt("GM", 0) == 1 && !dontRead)
         {
             Holder[0].sprite = GoldenSprites[0];
             Holder[1].sprite = GoldenSprites[1];
@@ -21,13 +23,16 @@ public class AnimB : MonoBehaviour
 
     public void WakeUp()
     {
-        if (PlayerPrefs.GetInt("GM", 0) == 1)
+        if (!dontRead)
         {
-            Holder[0].sprite = GoldenSprites[2];
-        }
-        else
-        {
-            Holder[0].sprite = GoldenSprites[3];
+            if (PlayerPrefs.GetInt("GM", 0) == 1)
+            {
+                Holder[0].sprite = GoldenSprites[2];
+            }
+            else
+            {
+                Holder[0].sprite = GoldenSprites[3];
+            }
         }
     }
 

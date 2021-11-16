@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("God", 1);
             }
-            if (FrogAmount >= 21)
+            if (FrogAmount >= 24)
             {
                 print("Unlocked Frog Pet");
                 PlayerPrefs.SetInt("Frog", 1);

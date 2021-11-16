@@ -16,11 +16,11 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         menuMan = GameObject.Find("MenuManager");
-        if (transform.GetChild(1).gameObject != null)
+        if (transform.childCount != 0)
         {
             Img = transform.GetChild(1).gameObject;
+            buttonText = transform.GetChild(0).GetComponent<Text>();
         }
-        buttonText = transform.GetChild(0).GetComponent<Text>();
     }
 
     public void Entered()
@@ -76,6 +76,9 @@ public class MenuManager : MonoBehaviour
         {
             Img.SetActive(false);
         }
-        buttonText.color = Color.white;
+        if (buttonText != null)
+        {
+            buttonText.color = Color.white;
+        }
     }
 }

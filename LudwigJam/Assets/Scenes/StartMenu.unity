@@ -2412,7 +2412,7 @@ GameObject:
   - component: {fileID: 651254598}
   - component: {fileID: 651254597}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: REMOCVETHIS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2507,8 +2507,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.21, y: -179.3}
-  m_SizeDelta: {x: 1950.4, y: 6492.6}
+  m_AnchoredPosition: {x: 0.21, y: -91.6}
+  m_SizeDelta: {x: 1950.4, y: 4738.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &674636793
 MonoBehaviour:
@@ -2541,12 +2541,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\nadded:\n\tmore settings\n\n\tadded hidden cosmetics\n\nbug fixes:\n\tfixed
-    double jump bug\n\nplayer changes:\n\tless friction when\n\tknocked down\n\n\tenter
-    free fall after falling\n\t2 screens\n\nsquid changes:\n\tsquid has comepletely\n\tbeen
-    revamped\n\n\tink projectiles made less\n\tpunishing\n\nfrog king changes:\n\tvisual
-    hitbox of tongue\n\tfixed\n\nmap changes:\n\tless punishing map\n\toverall\n\n\tthe
-    shallows have been\n\tchanged"
+  m_Text: "added:\n\tin game timer for each\n\tlevel to see specific time\n\n\tmenu
+    time shows\n\tmilliseconds now\n\n\tmore frogs (24 total)\n\n\t\"gold\" mode
+    for frog king\n\nother:\n\tgeneral bug fixes\n\n\ttiny map changes\n\t(should
+    not affect runs)\n\n\n\n\n\n\nvalmerix should be\ncredited as a playtester\n\t-
+    valmerix"
 --- !u!222 &674636794
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4071,6 +4070,7 @@ RectTransform:
   - {fileID: 1901813706}
   - {fileID: 1520285146}
   - {fileID: 302515571}
+  - {fileID: 2135293290}
   m_Father: {fileID: 1990773554}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4115,6 +4115,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8bf93a213c6f1254eb9108c5a1421085, type: 3}
   GoldenSprites: []
   Holder: []
+  dontRead: 1
 --- !u!82 &995941612
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5840,8 +5841,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000049591, y: 262}
-  m_SizeDelta: {x: 203.1, y: 321.4}
+  m_AnchoredPosition: {x: 18.4, y: 262}
+  m_SizeDelta: {x: 239.91, y: 321.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1468526385
 MonoBehaviour:
@@ -6101,7 +6102,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 245.6, y: 107.75}
+  m_AnchoredPosition: {x: 184.2, y: 107.75}
   m_SizeDelta: {x: 1063, y: 304.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1520285147
@@ -6144,13 +6145,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 102
-    m_Alignment: 4
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 99:99:99
+  m_Text: 99:99:99:999
 --- !u!222 &1520285149
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6825,6 +6826,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e3f9599660b675547b797c583345ae8b, type: 3}
   GoldenSprites: []
   Holder: []
+  dontRead: 1
 --- !u!82 &1899179693
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7010,7 +7012,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ver 1.6.5
+  m_Text: ver 1.6.6
 --- !u!222 &1901813708
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7818,4 +7820,101 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105100298}
+  m_CullTransparentMesh: 0
+--- !u!1 &2135293289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2135293290}
+  - component: {fileID: 2135293293}
+  - component: {fileID: 2135293292}
+  - component: {fileID: 2135293291}
+  m_Layer: 5
+  m_Name: Bait
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2135293290
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135293289}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_Children: []
+  m_Father: {fileID: 995941609}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 359.4, y: 287}
+  m_SizeDelta: {x: 1063, y: 304.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &2135293291
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135293289}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 64acce9902e59fc45b15d45d52f97abd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2135293292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135293289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d400648449dc9ac48b394190e4c44da9, type: 3}
+    m_FontSize: 120
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 120
+    m_Alignment: 5
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: '!'
+--- !u!222 &2135293293
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135293289}
   m_CullTransparentMesh: 0
